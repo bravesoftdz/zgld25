@@ -13,6 +13,8 @@
       <Title Value="zgld25"/>
       <UseAppBundle Value="False"/>
       <ResourceType Value="res"/>
+      <UseXPManifest Value="True"/>
+      <Icon Value="0"/>
     </General>
     <i18n>
       <EnableI18N LFM="False"/>
@@ -52,6 +54,13 @@
       <OtherUnitFiles Value="..\zengl\headers;..\zengl\extra;..\zengl\src;..\zengl\lib\msvcrt\$(TargetCPU);..\zengl\lib\jpeg\$(TargetCPU)-$(TargetOS);..\zengl\lib\ogg\$(TargetCPU)-$(TargetOS);../zengl/lib/theora/$(TargetCPU)-$(TargetOS);../zengl/lib/zlib/$(TargetCPU)-$(TargetOS);../zengl/lib/zip/$(TargetCPU)-$(TargetOS)"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
+    <Linking>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
     <Other>
       <CompilerMessages>
         <MsgFileName Value=""/>
