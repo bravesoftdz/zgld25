@@ -1,6 +1,9 @@
 program zgld25;
+{$DEFINE STATIC}
+uses zgl_main, zgl_window;
 
 begin
-  writeln('hello world');
+  wnd_SetCaption( 'hello world!' );
+  zgl_Init;
 end.
 
