@@ -49,6 +49,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
+      <OtherUnitFiles Value="..\zengl\headers;..\zengl\extra;..\zengl\src;..\zengl\lib\msvcrt\$(TargetCPU);..\zengl\lib\jpeg\$(TargetCPU)-$(TargetOS);..\zengl\lib\ogg\$(TargetCPU)-$(TargetOS);../zengl/lib/theora/$(TargetCPU)-$(TargetOS);../zengl/lib/zlib/$(TargetCPU)-$(TargetOS);../zengl/lib/zip/$(TargetCPU)-$(TargetOS)"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Other>
