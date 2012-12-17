@@ -1,0 +1,11 @@
+#+TITLE: zengl game for ludum dare 25
+
+* game concept: reverse defender
+
+You play as an alien attempting to kidnap humans on a scrolling, wraparound landscape. You must avoid the lasers / missles / spaceships shooting at you.
+
+* prerequisites
+
+- [[http://lazarus.freepascal.org/][lazarus]] - to compile / edit the sources ( you may be able to compile it with just free pascal but lazarus will make your life easier )
+- [[http://zengl.org/][zengl]] - 2D cross platform game engine written in pascal
+
