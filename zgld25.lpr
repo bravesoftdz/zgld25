@@ -43,16 +43,17 @@ const
   chunks = 128;
 
   { palette }
-  opaque = $ff000000;
-  rgb_land_a = opaque + $663300;
-  rgb_land_b = opaque + $cc6600;
-  rgb_squid_color = opaque + $d4145a
-  rgb_squid_shade = opaque + $9e005d;
+  black = $ff000000;
+  rgb_land_a = black + $663300;
+  rgb_land_b = black + $cc6600;
+  rgb_squid_color = black + $d4145a;
+  rgb_squid_shade = black + $9e005d;
+
 
 var
   spritesheet : texture;
   alien : sprite;
-  landscape : array[ -chunks div 2 .. chunks div 2 ] of byte;
+  landscape : array[ -chunks div 2 .. chunks div 2 - 1 ] of byte;
   camera : zglPCamera2D;
 
   function clamped( var n : single; const min, max : single ) : boolean;
@@ -103,7 +104,7 @@ var
                 low(landscape) * chunkw,
                 high(landscape) * chunkw - alien.w )
        then  alien.dx := 0;
-    if clamped( alien.y, 0, scrHeight - alien.h )
+    if clamped( alien.y, 100, scrHeight - 150 )  { leave room for hud , ground }
        then alien.dy := 0;
 
     { limit frames per second }
