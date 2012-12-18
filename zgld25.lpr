@@ -28,8 +28,16 @@ type
     accel : vector2d;
   end;
 
-var
+const
   assetdir : UTF8String = 'assets';
+  maxfps = 50;
+  naplen = 1000 div maxfps;
+  maxdx = 12.5;
+  maxdy = 7.5;
+  gravity = 0.075;
+  friction = 0.0125;
+
+var
   spritesheet : texture;
   alien : sprite;
 
@@ -37,8 +45,8 @@ var
   begin
     spritesheet := tex_LoadFromFile( assetdir + '/invaders.png' );
     tex_SetFrameSize( spritesheet, 50, 50 );
-    alien.accel.x := 0.050;
-    alien.accel.y := 0.025;
+    alien.accel.x := 0.50;
+    alien.accel.y := 0.25;
   end;
 
   procedure update( dt : double );
@@ -46,23 +54,30 @@ var
     if key_down( K_RIGHT ) then alien.dx += alien.accel.x;
     if key_down( K_LEFT ) then alien.dx -= alien.accel.x;
     if key_down( K_UP ) then alien.dy -= alien.accel.y;
-    if key_down( k_down ) then alien.dy += alien.accel.y;
+    if key_down( k_down ) then alien.dy += alien.accel.y * 1.50;
     key_clearstate;
 
-    if abs(alien.dx) > 75 then alien.dx := sign( alien.dx ) * 7.5;
-    if abs(alien.dy) > 75 then alien.dy := sign( alien.dy ) * 7.5;
+    { speed checking }
+    if abs(alien.dx) > maxdx then alien.dx := sign( alien.dx ) * maxdx;
+    if abs(alien.dy) > maxdy then alien.dy := sign( alien.dy ) * maxdy;
+
+    { bounds checking }
     if alien.x < 0 then begin alien.x := 0; alien.dx := 0 end;
     if alien.x > 750 then begin alien.x := 750; alien.dx := 0 end;
     if alien.y < 0 then begin alien.y := 0; alien.dy := 0 end;
     if alien.y > 550 then begin alien.y := 550; alien.dy := 0 end;
-    alien.x += alien.dx * dt / 100;
-    alien.y += alien.dy * dt / 100;
-    alien.dy += 0.001; // gravity
+
+    alien.x += alien.dx * dt / maxfps;
+    alien.y += alien.dy * dt / maxfps;
+    alien.dy += gravity;
+    alien.dx *= 1 - friction;
+
+    sleep( naplen );
   end;
 
   procedure render;
   begin
-    asprite2d_Draw( spritesheet, alien.x, alien.y, 50, 50, floor((alien.dx / 75) * 20), 10 );
+    asprite2d_Draw( spritesheet, alien.x, alien.y, 50, 50, floor((alien.dx / maxdx) * 20), 10 );
   end;
 
 begin
