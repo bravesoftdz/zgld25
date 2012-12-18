@@ -112,8 +112,22 @@ var
   end;
 
   procedure render_hud;
+    const width = chunks * 2; height = 50; ypos = 15;
+    var xpos : integer;
   begin
-    cam2d_set( constCamera2D );
+    cam2d_set( @constCamera2D );
+
+    { draw  the map }
+    xpos := ( scrWidth - width ) div 2;
+    pr2d_rect( xpos -2, ypos-2, width + 4, height + 4, rgb_squid_shade, 255, PR2D_FILL );
+    pr2d_Rect( xpos, ypos, width, height, black, 255, PR2D_FILL );
+
+    { draw the alien on the map }
+    { the *2 is because we have 2pixels per landscape chunk }
+    pr2d_rect( xpos + 2 * ( high( landscape ) + floor( alien.x / chunkw )),
+               ypos + floor( alien.y / scrHeight * height ),
+               4, 4, rgb_squid_color, 255, PR2D_FILL );
+
   end;
 
   procedure render_cam;
