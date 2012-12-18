@@ -42,12 +42,18 @@ const
   chunkw = 50;
   chunks = 128;
 
+  { palette }
+  opaque = $ff000000;
+  rgb_land_a = opaque + $663300;
+  rgb_land_b = opaque + $cc6600;
+  rgb_squid_color = opaque + $d4145a
+  rgb_squid_shade = opaque + $9e005d;
+
 var
   spritesheet : texture;
   alien : sprite;
   landscape : array[ -chunks div 2 .. chunks div 2 ] of byte;
   camera : zglPCamera2D;
-
 
   function clamped( var n : single; const min, max : single ) : boolean;
   begin
@@ -75,6 +81,7 @@ var
 
   procedure update( dt : double );
   begin
+    { handle keyboard }
     if key_down( K_RIGHT ) then alien.dx += alien.accel.x;
     if key_down( K_LEFT ) then alien.dx -= alien.accel.x;
     if key_down( K_UP ) then alien.dy -= alien.accel.y;
@@ -84,9 +91,12 @@ var
     { speed checking }
     if abs(alien.dx) > maxdx then alien.dx := sign( alien.dx ) * maxdx;
     if abs(alien.dy) > maxdy then alien.dy := sign( alien.dy ) * maxdy;
-
     alien.x += alien.dx * dt / maxfps;
     alien.y += alien.dy * dt / maxfps;
+
+    { external forces }
+    alien.dy += gravity;
+    alien.dx *= 1 - friction;
 
     { bounds checking }
     if clamped( alien.x,
@@ -96,27 +106,38 @@ var
     if clamped( alien.y, 0, scrHeight - alien.h )
        then alien.dy := 0;
 
-    alien.dy += gravity;
-    alien.dx *= 1 - friction;
-
-    { follow the alien, but with a slight lag }
-    camera^.x := alien.x - scrWidth div 2 ;
-    cam2d_Set( camera );
-
+    { limit frames per second }
     sleep( naplen );
   end;
 
-  procedure render;
+  procedure render_hud;
+  begin
+    cam2d_set( constCamera2D );
+  end;
+
+  procedure render_cam;
     var i : integer; color : longword;
   begin
+    camera^.x := alien.x - scrWidth div 2 ;
+    cam2d_Set( camera );
+
+    { draw the alien }
     asprite2d_Draw( spritesheet, alien.x, alien.y, 50, 50,
                     floor((alien.dx / maxdx) * 20), 10 );
+
+    { draw the terrain }
     for i := low( landscape ) to high( landscape ) do
     begin
-       if odd( i ) then color := $ff663300 else color := $ffcc6600;
+       if odd( i ) then color := rgb_land_a else color := rgb_land_b;
        pr2d_rect( i * chunkw, scrHeight - landscape[ i ],
                   chunkw, landscape[ i ], color,  255, PR2D_FILL );
     end
+  end;
+
+  procedure render;
+  begin
+    render_hud;
+    render_cam;
   end;
 
 begin
