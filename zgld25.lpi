@@ -35,12 +35,45 @@
         <FormatVersion Value="1"/>
       </local>
     </RunParams>
-    <Units Count="1">
+    <Units Count="8">
       <Unit0>
         <Filename Value="zgld25.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="zgld25"/>
       </Unit0>
+      <Unit1>
+        <Filename Value="C:\lib\zengl-src-0.3.12\src\jni.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="jni"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="C:\lib\zengl-src-0.3.12\src\ZenGL.dll"/>
+        <IsPartOfProject Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="C:\lib\zengl-src-0.3.12\src\ZenGL.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ZenGL"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="C:\lib\zengl-src-0.3.12\src\ZenGL.res"/>
+        <IsPartOfProject Value="True"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="C:\lib\zengl-src-0.3.12\src\zgl_application.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="zgl_application"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="C:\lib\zengl-src-0.3.12\src\zgl_camera_2d.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="zgl_camera_2d"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="C:\lib\zengl-src-0.3.12\headers\zglHeader.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="zglHeader"/>
+      </Unit7>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -51,7 +84,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="..\zengl\headers;..\zengl\extra;..\zengl\src;..\zengl\lib\msvcrt\$(TargetCPU);..\zengl\lib\jpeg\$(TargetCPU)-$(TargetOS);..\zengl\lib\ogg\$(TargetCPU)-$(TargetOS);../zengl/lib/theora/$(TargetCPU)-$(TargetOS);../zengl/lib/zlib/$(TargetCPU)-$(TargetOS);../zengl/lib/zip/$(TargetCPU)-$(TargetOS)"/>
+      <OtherUnitFiles Value="..\zengl\headers;..\zengl\extra;..\zengl\src;..\zengl\lib\msvcrt\$(TargetCPU);..\zengl\lib\jpeg\$(TargetCPU)-$(TargetOS);..\zengl\lib\ogg\$(TargetCPU)-$(TargetOS);../zengl/lib/theora/$(TargetCPU)-$(TargetOS);../zengl/lib/zlib/$(TargetCPU)-$(TargetOS);../zengl/lib/zip/$(TargetCPU)-$(TargetOS);C:\lib\zengl-src-0.3.12\src\;C:\lib\zengl-src-0.3.12\headers\"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <CodeGeneration>
