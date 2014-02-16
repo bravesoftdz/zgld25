@@ -1,0 +1,9 @@
+lib
+*~
+*.bak
+*.lps
+*.exe
+*.dll
+*.so
+*.a
+log.txt
